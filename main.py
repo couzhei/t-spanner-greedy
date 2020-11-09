@@ -163,9 +163,12 @@ class Window(QMainWindow):
 
     def onclick(self, event):
         """It's an event handler, in this case, clicking on the plot"""
-        points.append(Point(event.xdata, event.ydata))
-        self.canvas.axes.plot(event.xdata, event.ydata, "o")
-        self.canvas.draw()
+        try:
+            self.canvas.axes.plot(event.xdata, event.ydata, "o")
+            self.canvas.draw()
+            points.append(Point(event.xdata, event.ydata))
+        except:
+            return None
 
     def clear(self):
         self.canvas.clear()
